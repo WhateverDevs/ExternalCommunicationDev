@@ -1,0 +1,3 @@
+[submodule "ExternalToolCommunication"]
+	path = ExternalToolCommunication
+	url = https://github.com/WhateverDevs/ExternalToolCommunication.git
