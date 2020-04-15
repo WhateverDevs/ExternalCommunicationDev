@@ -4,36 +4,38 @@ using System.Text;
 using System.Diagnostics;
 using UnityEngine;
 using WhateverDevs.Core.Runtime.Serialization;
+using Debug = UnityEngine.Debug;
 
 [Serializable]
 public class BLOCK
 {
-    public long TIMESTAMP { get; set; }
-    public List<int> VALUES { get; set; }
+    public long TIMESTAMP;
+    public int[] VALUES;
 }
 [Serializable]
 public class DATA
 {
-    public List<BLOCK> BLOCKS { get; set; }
-    public string ID { get; set; }
+    public BLOCK[] BLOCKS;
+    public string ID;
 }
 [Serializable]
 public class RootObject
 {
-    public DATA DATA { get; set; }
+    public DATA DATA;
 
     public RootObject()
     {
         DATA = new DATA();
-        DATA.BLOCKS = new List<BLOCK>();
+        DATA.BLOCKS = new BLOCK[1];
         BLOCK temp = new BLOCK();
         temp.TIMESTAMP = Stopwatch.GetTimestamp();
-        temp.VALUES = new List<int>();
-        DATA.BLOCKS.Add(temp);
+        temp.VALUES = new int[1];
+        temp.VALUES[0] = 1;
+        DATA.BLOCKS[0] = temp;
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class SimulatorMessage
 {
     public RootObject _info;
@@ -87,15 +89,20 @@ public class SimulatorMessage
 
         for (int i = 0; i < allJsons.Count; ++i)
         {
-            _info = serializer.From<RootObject>(allJsons[i]);//todo change
+            RootObject a = serializer.From<RootObject>(allJsons[i]);//todo change
+            _info = a;
+            SampleScript.timestamp = a.DATA.BLOCKS[0].TIMESTAMP;
         }
     }
-    
+
     public byte[] ToByteArray()
     {
+        string a = JsonUtility.ToJson(_info);
         string resultString = serializer.To(_info);
         //protocol_end
-        byte[] bArray = Encoding.UTF8.GetBytes(resultString);
+        Debug.Log("TIMESTAMP" + SampleScript.timestamp);
+        byte[] bArray = //Encoding.UTF7.GetBytes("{\"BLOCKS\":[{\"TIMESTAMP\":" + Stopwatch.GetTimestamp().ToString() + "\"VALUES\":[1]}],\"ID\":\"protocolo\"}");//(resultString);
+            Encoding.UTF8.GetBytes("{\"DATA\":{\"BLOCKS\":[{\"TIMESTAMP\":" + SampleScript.timestamp + ",\"VALUES\":[1]}],\"ID\":\"protocol\"}}");//(resultString);
         return bArray;
     }
 }

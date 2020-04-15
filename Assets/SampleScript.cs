@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using WhateverDevs.Core.Runtime.Common;
 using Debug = UnityEngine.Debug;
-
-public class SampleScript : MonoBehaviour
+    
+public class SampleScript : LoggableMonoBehaviour<SampleScript>
 {
     #region Should be configuration
     private string ProcessName = "bbtControllerDevd";
@@ -13,6 +13,7 @@ public class SampleScript : MonoBehaviour
     
     #endregion
     
+    public static long timestamp = 0;
     
     private CommunicationThread communicationThread;
     private volatile bool dataReceived = false;
@@ -83,10 +84,12 @@ public class SampleScript : MonoBehaviour
     {
         try
         {
-            if (!threadReady)
+            if (threadReady)
             {
+                //GetLogger().Error("prueba");
                 msgSimulatorMessage = new SimulatorMessage();
-                msgSimulatorMessage._info.DATA.ID = "protocol_marker";
+                msgSimulatorMessage._info.DATA.ID = "protocolo";
+                //GetLogger().Error(msgSimulatorMessage._info.DATA.ID + "time " + msgSimulatorMessage._info.DATA.BLOCKS[0].TIMESTAMP);
                 communicationThread.Send(msgSimulatorMessage.ToByteArray());
             }
 
@@ -117,7 +120,7 @@ public class SampleScript : MonoBehaviour
     
     private void CloseThread()
     {
-        Debug.LogWarning("Closing car thread");
+        Debug.LogWarning("Closing thread");
         threadReady = false;
         communicationThread.EndThread = true;
     }

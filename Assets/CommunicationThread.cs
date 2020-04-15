@@ -51,7 +51,7 @@ using System.Text;
                 
                 SimulatorMessage a = new SimulatorMessage();
                 a.FromByteArray(buffer);
-                Debug.Log(" aaaa " + a._info.DATA.ID);
+                Debug.Log("ID " + a._info.DATA.ID + "TIMESTAMP " + a._info.DATA.BLOCKS[0].TIMESTAMP);
             }
             catch (SocketException e)
             {
@@ -100,6 +100,6 @@ using System.Text;
             }
 
             float threadFreq = threadTimes / (deltaTimesThread.Count - deltaTimesThread.Count / 2);
-            Debug.LogWarning("Average timeStamp threadCar: " + threadFreq);
+            Debug.LogWarning("Average timeStamp thread: " + threadFreq);
         }
     }
