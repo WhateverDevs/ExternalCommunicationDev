@@ -2,7 +2,7 @@
     "name": "ExternalCommunicationDev",
     "references": [
         "GUID:6f75e3e9b2be11e40a79ad3ceec60e41",
-        "GUID:93e7bce66fb364a47804d71255043d1a"
+        "GUID:b72ae0186f5c5e44e81d77171d02d555"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
