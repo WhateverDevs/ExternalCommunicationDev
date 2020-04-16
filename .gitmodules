@@ -1,1 +1,4 @@
 
+[submodule "Packages/ExternalCommunication"]
+	path = Packages/ExternalCommunication
+	url = https://github.com/WhateverDevs/ExternalCommunication.git
