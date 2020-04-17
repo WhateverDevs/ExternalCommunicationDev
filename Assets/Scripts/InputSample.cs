@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
+using WhateverDevs.Core.Runtime.Configuration;
+using Zenject;
 
 public class InputSample : MonoBehaviour
 {
     private BitBrainSampleManager sampleManager;
 
-    private void Start()
+    [Inject]
+    public void Construct(IConfigurationManager configurationManager)
     {
         sampleManager = new BitBrainSampleManager();
+        configurationManager.GetConfiguration(out ExternalCommunicationConfigurationData a);
+        sampleManager.SetConfigurationData(a);
     }
 
     private void Update()

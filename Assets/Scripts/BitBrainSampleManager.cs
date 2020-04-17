@@ -1,11 +1,12 @@
 ﻿using System;
+using WhateverDevs.Core.Runtime.Configuration;
 using Debug = UnityEngine.Debug;
     
 public class BitBrainSampleManager : CommunicationManager
 {
-    public BitBrainSampleManager()
+    public void SetConfigurationData(ExternalCommunicationConfigurationData data)
     {
-        configurationData = new ExternalCommunicationConfigurationData();
+        configurationData = data;
     }
     public override void SendFirstMessage()
     {
