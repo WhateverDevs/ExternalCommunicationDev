@@ -1,40 +1,41 @@
 ﻿using System;
-using WhateverDevs.Core.Runtime.Configuration;
-using Debug = UnityEngine.Debug;
-    
+using WhateverDevs.ExternalCommunication.Runtime;
+
+/// <summary>
+///     BitBrainSampleManager sample to test features
+/// </summary>
 public class BitBrainSampleManager : CommunicationManager
 {
-    public void SetConfigurationData(ExternalCommunicationConfigurationData data)
-    {
-        configurationData = data;
-    }
+    public static long Timestamp;
+
+    public void SetConfigurationData(ExternalCommunicationConfigurationData data) => ConfigurationData = data;
+
     public override void SendFirstMessage()
     {
         try
         {
-            if (threadReady)
+            if (ThreadReady)
             {
                 CommunicationMessage msgSimulatorMessage = new CommunicationMessage();
-                msgSimulatorMessage._info.DATA.ID = "protocol";
-                communicationThread.Send(msgSimulatorMessage.ToByteArray());
+                msgSimulatorMessage.Info.Data.Id = "protocol";
+                CommunicationThread.Send(msgSimulatorMessage.ToByteArray());
             }
-
         }
         catch (Exception e)
         {
             GetLogger().Error("SendFirstMessage error :" + e);
         }
     }
-            
+
     public override void SendLastMessage()
     {
         try
         {
-            if (threadReady)
+            if (ThreadReady)
             {
                 CommunicationMessage msgSimulatorMessage = new CommunicationMessage();
-                msgSimulatorMessage._info.DATA.ID = "protocol_end";
-                communicationThread.Send(msgSimulatorMessage.ToByteArray());
+                msgSimulatorMessage.Info.Data.Id = "protocol_end";
+                CommunicationThread.Send(msgSimulatorMessage.ToByteArray());
             }
         }
         catch (Exception e)
