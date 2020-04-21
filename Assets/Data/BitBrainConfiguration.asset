@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConfigurationName: BitBrain
   ConfigData:
-    processName: bbtControllerDevd
-    ipAddress: 127.0.0.1
-    port: 5555
-    socketType: 1
-    protocolType: 6
-    bufferSize: 1024
+    ProcessName: bbtControllerDevd
+    IpAddress: 127.0.0.1
+    Port: 5555
+    SocketType: 1
+    ProtocolType: 6
+    BufferSize: 1024
   SavingAndLoadingDisabled: 1
