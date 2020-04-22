@@ -103,7 +103,6 @@ namespace ExternalCommunicationDev
         {
             Info.Data.Blocks[0].Timestamp = Stopwatch.GetTimestamp();
             string resultString = JsonUtility.ToJson(Info).ToUpper();//todo modify 
-            //string resultString = a.ToUpper();
             GetLogger().Debug("TIMESTAMP" + Info.Data.Blocks[0].Timestamp);
             
             byte[] bArray = Encoding.UTF8.GetBytes(resultString);
