@@ -11,14 +11,14 @@ namespace ExternalCommunicationDev
     /// </summary>
     public class BitBrainInput : MonoBehaviour
     {
-        private BitBrainSampleManager sampleManager;
+        private BitBrainManager sampleManager;
 
         public TMP_Text TextMesh;
 
         [Inject]
         public void Construct(IConfigurationManager configurationManager)
         {
-            sampleManager = new BitBrainSampleManager();
+            sampleManager = new BitBrainManager();
             configurationManager.GetConfiguration(out ExternalCommunicationConfigurationData a);
             sampleManager.SetConfigurationData(a);
         }
